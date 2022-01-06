@@ -6,4 +6,7 @@
 #     "password": "sure"
 # }
 
-GET  http://localhost:3000/products HTTP/1.1
+# GET  http://localhost:3000/products HTTP/1.1
+
+
+# GET  http://localhost:3000/logout HTTP/1.1

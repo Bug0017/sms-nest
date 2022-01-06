@@ -1,11 +1,15 @@
 import { SessionGuard } from './auth/session.guard';
 import { LocalAuthGuard } from './auth/auth.guard';
-import { Controller, Get, Post, UseGuards , Request} from '@nestjs/common';
+import { Controller, Get, Post, UseGuards , Request, Res} from '@nestjs/common';
+import { Response } from 'express';
 import { AppService } from './app.service';
 import {PrismaService} from './prisma/prisma.service';
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService, private prisma: PrismaService) {}
+  constructor(
+    private readonly appService: AppService,
+    private prisma: PrismaService,
+  ) {}
 
   @Get()
   getHello() {
@@ -14,15 +18,27 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req){
-    return req.user
+  login(@Request() req) {
+    return {
+      ...req.user,
+      message: 'logged in',
+    };
   }
 
   @UseGuards(SessionGuard)
   @Get('products')
-  getPublishedProducts(){
-    return this.prisma.product.findMany({where:{
-      published:true
-    }})
+  getPublishedProducts() {
+    return this.prisma.product.findMany({
+      where: {
+        published: true,
+      },
+    });
+  }
+
+  @UseGuards(SessionGuard)
+  @Get('logout')
+  logout(@Request() req, @Res() res: Response) {
+    req.logout();
+    res.redirect('/');
   }
 }
