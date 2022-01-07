@@ -4,6 +4,8 @@ import { Controller, Get, Post, UseGuards , Request, Res} from '@nestjs/common';
 import { Response } from 'express';
 import { AppService } from './app.service';
 import {PrismaService} from './prisma/prisma.service';
+import { Roles } from './roles/roles.decorator';
+import { Role } from './roles/role.enum';
 @Controller()
 export class AppController {
   constructor(
@@ -26,6 +28,7 @@ export class AppController {
   }
 
   @UseGuards(SessionGuard)
+  @Roles(Role.Admin)
   @Get('products')
   getPublishedProducts() {
     return this.prisma.product.findMany({
