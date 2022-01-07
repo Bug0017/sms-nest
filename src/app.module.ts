@@ -1,3 +1,4 @@
+
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
@@ -24,6 +25,7 @@ import { RolesGuard } from './roles/roles.guard';
       provide: 'APP_GUARD',
       useClass: RolesGuard,
     },
+    
   ],
 })
 export class AppModule {}

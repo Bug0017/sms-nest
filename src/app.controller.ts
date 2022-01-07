@@ -1,4 +1,6 @@
-import { SessionGuard } from './auth/session.guard';
+import { JwtAuthGuard } from './auth/jwt.guard';
+import { AuthService } from './auth/auth.service';
+
 import { LocalAuthGuard } from './auth/auth.guard';
 import { Controller, Get, Post, UseGuards , Request, Res} from '@nestjs/common';
 import { Response } from 'express';
@@ -9,8 +11,9 @@ import { Role } from './roles/role.enum';
 @Controller()
 export class AppController {
   constructor(
-    private readonly appService: AppService,
+    private appService: AppService,
     private prisma: PrismaService,
+    private authService: AuthService
   ) {}
 
   @Get()
@@ -20,14 +23,12 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req) {
-    return {
-      ...req.user,
-      message: 'logged in',
-    };
+  login(@Request() req, @Res({ passthrough: true }) response: Response) {
+    console.log(req.user)
+    return this.authService.login(req.user);
   }
 
-  @UseGuards(SessionGuard)
+  @UseGuards(JwtAuthGuard)
   @Roles(Role.Admin)
   @Get('products')
   getPublishedProducts() {
@@ -38,7 +39,7 @@ export class AppController {
     });
   }
 
-  @UseGuards(SessionGuard)
+
   @Get('logout')
   logout(@Request() req, @Res() res: Response) {
     req.logout();

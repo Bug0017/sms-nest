@@ -14,15 +14,15 @@ export class UsersService {
     {
       id: 'sursdffendarsdfds',
       name: 'surendar',
-      username: 'sure',
-      password: 'sure',
+      username: 'sure@test.com',
+      password: 'sure123',
       role: Role.User
     },
     {
       id: 'sursdffendssssarsdfds',
       name: 'arun',
-      username: 'arun',
-      password: 'arun',
+      username: 'arun@test.com',
+      password: 'arun123',
       role: Role.Admin
     },
   ];
