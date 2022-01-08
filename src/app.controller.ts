@@ -1,7 +1,5 @@
-
 import { JwtAuthGuard } from './auth/jwt.guard';
 import { AuthService } from './auth/auth.service';
-
 import { LocalAuthGuard } from './auth/auth.guard';
 import { Controller, Get, Post, UseGuards , Request, Res} from '@nestjs/common';
 import { Response } from 'express';
@@ -38,7 +36,6 @@ export class AppController {
       },
     });
   }
-
 
   @Get('logout')
   logout(@Request() req, @Res() res: Response) {
