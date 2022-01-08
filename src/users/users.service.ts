@@ -9,7 +9,6 @@ export type User = {
 }
 @Injectable()
 export class UsersService {
-  #roles: string[];
   #users: User[] = [
     {
       id: 'sursdffendarsdfds',

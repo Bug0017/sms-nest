@@ -22,7 +22,7 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req, @Res({ passthrough: true }) response: Response) {
+  login(@Request() req) {
     return this.authService.login(req.user);
   }
 
