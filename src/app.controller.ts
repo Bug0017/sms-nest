@@ -1,3 +1,4 @@
+
 import { JwtAuthGuard } from './auth/jwt.guard';
 import { AuthService } from './auth/auth.service';
 
@@ -6,8 +7,8 @@ import { Controller, Get, Post, UseGuards , Request, Res} from '@nestjs/common';
 import { Response } from 'express';
 import { AppService } from './app.service';
 import {PrismaService} from './prisma/prisma.service';
-import { Roles } from './roles/roles.decorator';
-import { Role } from './roles/role.enum';
+import { Roles } from './auth/roles/roles.decorator';
+import { Role } from './auth/roles/role.enum';
 @Controller()
 export class AppController {
   constructor(
@@ -24,7 +25,6 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   login(@Request() req, @Res({ passthrough: true }) response: Response) {
-    console.log(req.user)
     return this.authService.login(req.user);
   }
 

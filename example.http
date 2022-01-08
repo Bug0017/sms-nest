@@ -6,7 +6,10 @@
 #     "password": "sure"
 # }
 
-# GET  http://localhost:3000/products HTTP/1.1
-
+GET  http://localhost:3000/products HTTP/1.1
+Content-Type: application/json
+header ;{
+Bearer Token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InN1cnNkZmZlbmRzc3NzYXJzZGZkcyIsIm5hbWUiOiJhcnVuIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjQxNjEwMTg5LCJleHAiOjE2NDQyMDIxODl9.nicCeTFpwABJrcpxkchjMGWufj91hVzLLEbC-xwqkgs'
+}
 
 # GET  http://localhost:3000/logout HTTP/1.1

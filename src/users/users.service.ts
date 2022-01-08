@@ -1,4 +1,4 @@
-import { Role } from './../roles/role.enum';
+import { Role } from '../auth/roles/role.enum';
 import { Injectable } from '@nestjs/common';
 export type User = {
     id:string,
